@@ -2,7 +2,7 @@
 const translations = {
     en: {
         'app-title': 'Ankiki',
-        'app-subtitle': 'Effortlessly create high-quality Anki flashcards with the help of AI. Use your preferred provider like OpenAI or Gemini, or run models locally via LM Studio for maximum privacy.',
+        'app-subtitle': 'Effortlessly create high-quality Anki flashcards with the help of AI. Use your preferred provider like OpenAI or Gemini, or run models locally via <a href="https://lmstudio.ai/" target="_blank">LM Studio</a> for maximum privacy.',
         'settings-title': 'AI Settings',
         'provider-label': 'Provider:',
         'api-key-label': 'API Key:',
@@ -38,8 +38,8 @@ const translations = {
         'fetch-models-btn': 'Fetch',
         'card-count-label': 'Number of flashcards:',
         'btn-fetching': 'Fetching...',
-        'error-fetch-models': 'Failed to fetch models. Check your API key/URL. If using LM Studio, ensure CORS is enabled.',
-        'lmstudio-cors-hint': 'Tip: Enable CORS in LM Studio (Settings > Server > CORS: On)',
+        'error-fetch-models': 'Failed to fetch models. Check your API key/URL. If using <a href="https://lmstudio.ai/" target="_blank">LM Studio</a>, ensure CORS is enabled.',
+        'lmstudio-cors-hint': 'Tip: Enable CORS in <a href="https://lmstudio.ai/" target="_blank">LM Studio</a> (Settings > Server > CORS: On)',
         'error-no-api-key': 'Please enter an API key / URL first.',
         'ignore-prompt-label': 'Ignore from input (optional):',
         'placeholder-ignore-prompt': 'e.g. Table of Contents, headers, footers...',
@@ -60,7 +60,9 @@ const translations = {
         'faq-trust-q': 'Can I trust the generated cards?',
         'faq-trust-a': 'No, you should always validate and check the generated cards. AI can sometimes make mistakes, hallucinate facts, or misinterpret the context of the input text.',
         'faq-copyright-q': 'Am I allowed to upload my contents to an LLM?',
-        'faq-copyright-a': 'It depends on the content. You must ensure you have the right to share the content with an AI provider. For example, many professors prohibit uploading their lecture slides or materials to third-party services. If you are concerned about privacy or copyright, consider using a local model via LM Studio.',
+        'faq-copyright-a': 'It depends on the content. You must ensure you have the right to share the content with an AI provider. For example, many professors prohibit uploading their lecture slides or materials to third-party services. If you are concerned about privacy or copyright, consider using a local model via <a href="https://lmstudio.ai/" target="_blank">LM Studio</a>.',
+        'faq-lmstudio-q': 'What is LM Studio and how do I use it?',
+        'faq-lmstudio-a': 'LM Studio is a desktop application that allows you to run large language models (LLMs) locally on your own computer. This ensures maximum privacy as your data never leaves your machine. <br><br>1. Download and install it from <a href="https://lmstudio.ai/" target="_blank">lmstudio.ai</a>.<br>2. Download a model within the app (e.g., Llama 3 or Mistral).<br>3. Go to the "Local Server" tab and click "Start Server".<br>4. Note: Running local models requires powerful hardware (ideally with a dedicated GPU and sufficient VRAM).<br>For detailed instructions, check the <a href="https://lmstudio.ai/docs" target="_blank">official documentation</a>.',
         'prompt-template': `Create {count} Anki flashcards from the following text. 
 The anki flashcards content MUST be english.
 {ignore_instruction}
@@ -72,7 +74,7 @@ Text: {text}`
     },
     de: {
         'app-title': 'Ankiki',
-        'app-subtitle': 'Erstelle mühelos hochwertige Anki-Karteikarten mit Hilfe von KI. Nutze den Anbieter deiner Wahl wie OpenAI oder Gemini, oder betreibe lokale Modelle über LM Studio für maximale Privatsphäre.',
+        'app-subtitle': 'Erstelle mühelos hochwertige Anki-Karteikarten mit Hilfe von KI. Nutze den Anbieter deiner Wahl wie OpenAI oder Gemini, oder betreibe lokale Modelle über <a href="https://lmstudio.ai/" target="_blank">LM Studio</a> für maximale Privatsphäre.',
         'settings-title': 'KI-Einstellungen',
         'provider-label': 'Anbieter:',
         'api-key-label': 'API-Schlüssel:',
@@ -108,8 +110,8 @@ Text: {text}`
         'fetch-models-btn': 'Abrufen',
         'card-count-label': 'Anzahl der Karteikarten:',
         'btn-fetching': 'Lädt...',
-        'error-fetch-models': 'Modelle konnten nicht geladen werden. Prüfe API-Key/URL. Wenn du LM Studio nutzt, stelle sicher, dass CORS aktiviert ist.',
-        'lmstudio-cors-hint': 'Tipp: Aktiviere CORS in LM Studio (Einstellungen > Server > CORS: An)',
+        'error-fetch-models': 'Modelle konnten nicht geladen werden. Prüfe API-Key/URL. Wenn du <a href="https://lmstudio.ai/" target="_blank">LM Studio</a> nutzt, stelle sicher, dass CORS aktiviert ist.',
+        'lmstudio-cors-hint': 'Tipp: Aktiviere CORS in <a href="https://lmstudio.ai/" target="_blank">LM Studio</a> (Einstellungen > Server > CORS: An)',
         'error-no-api-key': 'Bitte gib zuerst einen API-Schlüssel / eine URL ein.',
         'ignore-prompt-label': 'Ignorieren (optional):',
         'placeholder-ignore-prompt': 'z.B. Inhaltsverzeichnis, Kopfzeilen, Fußzeilen...',
@@ -130,7 +132,9 @@ Text: {text}`
         'faq-trust-q': 'Kann ich den generierten Karten vertrauen?',
         'faq-trust-a': 'Nein, du solltest die generierten Karten immer validieren und überprüfen. KI kann manchmal Fehler machen, Fakten halluzinieren oder den Kontext des Eingabetextes missverstehen.',
         'faq-copyright-q': 'Darf ich meine Inhalte bei einer KI hochladen?',
-        'faq-copyright-a': 'Das hängt vom Inhalt ab. Du musst sicherstellen, dass du das Recht hast, die Inhalte mit einem KI-Anbieter zu teilen. Zum Beispiel untersagen viele Professoren ausdrücklich das Hochladen ihrer Vorlesungsfolien oder Materialien bei Drittanbietern. Wenn du Bedenken bezüglich Datenschutz oder Urheberrecht hast, ziehe in Erwägung, ein lokales Modell über LM Studio zu nutzen.',
+        'faq-copyright-a': 'Das hängt vom Inhalt ab. Du musst sicherstellen, dass du das Recht hast, die Inhalte mit einem KI-Anbieter zu teilen. Zum Beispiel untersagen viele Professoren ausdrücklich das Hochladen ihrer Vorlesungsfolien oder Materialien bei Drittanbietern. Wenn du Bedenken bezüglich Datenschutz oder Urheberrecht hast, ziehe in Erwägung, ein lokales Modell über <a href="https://lmstudio.ai/" target="_blank">LM Studio</a>.',
+        'faq-lmstudio-q': 'Was ist LM Studio und wie nutze ich es?',
+        'faq-lmstudio-a': 'LM Studio ist eine Desktop-Anwendung, mit der du große Sprachmodelle (LLMs) lokal auf deinem eigenen Computer ausführen kannst. Dies gewährleistet maximale Privatsphäre, da deine Daten deinen Rechner nie verlassen. <br><br>1. Lade es von <a href="https://lmstudio.ai/" target="_blank">lmstudio.ai</a> herunter und installiere es.<br>2. Lade ein Modell innerhalb der App herunter (z.B. Llama 3 oder Mistral).<br>3. Gehe zum Tab "Local Server" und klicke auf "Start Server".<br>4. Hinweis: Das Ausführen lokaler Modelle erfordert leistungsstarke Hardware (idealerweise mit einer dedizierten GPU und ausreichend VRAM).<br>Detaillierte Anweisungen findest du in der <a href="https://lmstudio.ai/docs" target="_blank">offiziellen Dokumentation</a>.',
         'prompt-template': `Erstelle {count} Anki-Karteikarten aus dem folgenden Text.
 Der Inhalt der Anki-Karteikarten MUSS auf Deutsch sein.
 {ignore_instruction}
