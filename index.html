@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anki AI Flashcard Creator</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#4a90e2">
+    <link rel="apple-touch-icon" href="icons/icon-192.png">
+    <script src="vendor/pdf.min.js"></script>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-content">
+            <span class="nav-brand">Anki AI</span>
+            <div class="lang-switcher">
+                <button class="lang-btn" data-lang="en">EN</button>
+                <button class="lang-btn" data-lang="de">DE</button>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <header>
+            <h1 data-i18n="app-title">Anki AI</h1>
+            <p data-i18n="app-subtitle">Generate flashcards from PDF or Text</p>
+        </header>
+
+        <section id="settings">
+            <h2 data-i18n="settings-title">AI Settings</h2>
+            <div class="form-group">
+                <label for="ai-provider" data-i18n="provider-label">Provider:</label>
+                <select id="ai-provider">
+                    <option value="openai">OpenAI</option>
+                    <option value="gemini">Gemini</option>
+                    <option value="lmstudio">LMStudio (Local)</option>
+                </select>
+            </div>
+            <div class="form-group" id="api-key-group">
+                <div class="label-with-link">
+                    <label for="api-key" id="api-key-label" data-i18n="api-key-label">API Key:</label>
+                    <a id="api-key-link" href="https://platform.openai.com/api-keys" target="_blank" class="help-link" data-i18n="get-key-link">Get API Key</a>
+                </div>
+                <input type="password" id="api-key" placeholder="Enter API Key">
+                <p class="warning-text" data-i18n="api-key-warning">Security Note: Never share your API token. It is stored only in your browser and is never uploaded. Please monitor your usage.</p>
+            </div>
+            <div class="form-group" id="model-group">
+                <div class="label-with-link">
+                    <label for="ai-model" data-i18n="model-label">Model:</label>
+                    <a id="model-link" href="https://platform.openai.com/docs/models" target="_blank" class="help-link" data-i18n="view-models-link">View Models</a>
+                </div>
+                <div class="model-input-container">
+                    <input type="text" id="ai-model" placeholder="gpt-3.5-turbo / gemini-pro / model-name">
+                    <button id="fetch-models-btn" class="secondary-btn" data-i18n="fetch-models-btn">Fetch Models</button>
+                </div>
+            </div>
+            <div class="settings-actions">
+                <button id="save-settings-btn" data-i18n="save-settings-btn">Save Settings</button>
+                <p class="hint-text" data-i18n="settings-hint">Note: Settings are saved in your browser's local storage. They may be lost if you clear your browser data.</p>
+            </div>
+        </section>
+
+        <section id="input-section">
+            <h2 data-i18n="input-title">Input Source</h2>
+            <div class="tabs">
+                <button class="tab-btn active" data-tab="text-input" data-i18n="tab-text">Text</button>
+                <button class="tab-btn" data-tab="pdf-input" data-i18n="tab-pdf">PDF</button>
+            </div>
+            <div id="text-input" class="tab-content active">
+                <textarea id="raw-text" placeholder="Paste your text here..."></textarea>
+            </div>
+            <div id="pdf-input" class="tab-content">
+                <input type="file" id="pdf-file" accept="application/pdf">
+                <div class="form-group" style="margin-top: 10px;">
+                    <label for="pdf-pages" data-i18n="pdf-pages-label">Pages (e.g., all, 1-5, 8):</label>
+                    <input type="text" id="pdf-pages" data-i18n-placeholder="placeholder-pdf-pages">
+                </div>
+                <div id="pdf-status"></div>
+            </div>
+            <button id="generate-btn" data-i18n="generate-btn">Generate Flashcards</button>
+            <div class="form-group" id="prompt-group">
+                <div class="label-row">
+                    <label for="card-count" data-i18n="card-count-label">Number of flashcards:</label>
+                    <input type="number" id="card-count" value="10" min="1" max="50" style="width: 80px;">
+                </div>
+                <div class="form-group">
+                    <label for="ignore-prompt" data-i18n="ignore-prompt-label">Ignore from input (optional):</label>
+                    <input type="text" id="ignore-prompt" data-i18n-placeholder="placeholder-ignore-prompt">
+                </div>
+                <label for="custom-prompt" data-i18n="prompt-label">Custom Prompt:</label>
+                <textarea id="custom-prompt" data-i18n-placeholder="placeholder-prompt"></textarea>
+            </div>
+        </section>
+
+        <section id="output-section">
+            <h2 data-i18n="output-title">Generated Flashcards</h2>
+            <div id="flashcards-list"></div>
+            <div class="actions">
+                <button id="download-csv" disabled data-i18n="download-btn">Download for Anki (.csv)</button>
+            </div>
+        </section>
+
+        <footer>
+            <div class="footer-links">
+                <a href="https://neamil.de/impressum-datenschutz/" id="impressum-link" target="_blank" data-i18n="impressum-link">Impressum</a>
+                <span class="footer-separator">|</span>
+                <a href="https://github.com" target="_blank" data-i18n="github-link">Source Code on GitHub</a>
+            </div>
+        </footer>
+    </div>
+
+    <script src="main.js"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js');
+        }
+    </script>
+</body>
+</html>
