@@ -1,0 +1,58 @@
+# Set default charset to UTF-8
+AddDefaultCharset UTF-8
+
+# Improved performance through compression
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/x-javascript application/json application/xml
+</IfModule>
+
+# Caching for static assets
+<IfModule mod_expires.c>
+    ExpiresActive On
+    
+    # Manifest and Service Worker
+    # sw.js should be revalidated frequently
+    ExpiresByType application/manifest+json "access plus 1 week"
+    <FilesMatch "sw\.js$">
+        ExpiresActive Off
+        Header set Cache-Control "no-cache, no-store, must-revalidate"
+        Header set Pragma "no-cache"
+        Header set Expires 0
+    </FilesMatch>
+    
+    # Images
+    ExpiresByType image/png "access plus 1 month"
+    ExpiresByType image/x-icon "access plus 1 month"
+    
+    # CSS and JS
+    ExpiresByType text/css "access plus 1 year"
+    ExpiresByType application/javascript "access plus 1 year"
+</IfModule>
+
+# Security Headers (Optional but recommended)
+<IfModule mod_headers.c>
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-Frame-Options "SAMEORIGIN"
+    Header set X-XSS-Protection "1; mode=block"
+</IfModule>
+
+# Prevent directory listing
+Options -Indexes
+
+# Deny path traversal and restrict access
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    
+    # Block any request containing dots followed by a slash (path traversal)
+    RewriteCond %{QUERY_STRING} \.\.\/ [NC,OR]
+    RewriteCond %{REQUEST_URI} \.\.\/ [NC]
+    RewriteRule .* - [F,L]
+    
+    # Only allow access to the webroot (optional but requested "only we need the webroot for access")
+    # This project is a static site with no subdirectories besides icons and vendor
+    # We allow these specific directories and files
+    RewriteCond %{REQUEST_URI} !^/(icons|vendor|index\.html|main\.js|style\.css|manifest\.json|sw\.js|LICENSE|README\.md|\.htaccess)?$ [NC]
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule .* - [F,L]
+</IfModule>
