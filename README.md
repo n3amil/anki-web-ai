@@ -7,7 +7,7 @@ A lightweight Progressive Web App (PWA) that uses AI to generate Anki-compatible
 ## Features
 
 - **No Build Tools**: Built with pure JavaScript, HTML5, and CSS3. No bundling or npm packages required.
-- **AI Integration**: Supports **OpenAI**, **Google Gemini**, and **[LMStudio](https://lmstudio.ai/)** (local models).
+- **AI Integration**: Supports **OpenAI**, **Google Gemini**, **Mistral**, **Perplexity**, **[Ollama](https://ollama.com/)** and **[LMStudio](https://lmstudio.ai/)** (local models).
 - **PDF Support**: Extracts text from PDF files directly in the browser using [PDF.js](https://mozilla.github.io/pdf.js/) (v3.4.120).
 - **PWA Capabilities**: Installable on desktop and mobile (iOS/Android) with offline support.
 - **Privacy Focused**: API keys are stored only in your browser's local storage and never uploaded to any server.

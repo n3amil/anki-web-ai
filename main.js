@@ -25,9 +25,13 @@ const translations = {
         'error-select-pdf': 'Please select a PDF file.',
         'error-empty-text': 'Input text is empty.',
         'error-lmstudio-response': 'Unexpected response from LMStudio',
+        'error-ollama-response': 'Unexpected response from Ollama',
         'lmstudio-url-label': 'LMStudio URL:',
+        'ollama-url-label': 'Ollama URL:',
         'placeholder-lmstudio-url': 'http://localhost:1234',
+        'placeholder-ollama-url': 'http://localhost:11434',
         'placeholder-lmstudio-model': 'model-identifier',
+        'placeholder-ollama-model': 'llama3 / mistral',
         'impressum-link': 'Legal Notice',
         'prompt-label': 'Custom Prompt:',
         'placeholder-prompt': 'Enter your custom prompt here...',
@@ -97,9 +101,13 @@ Text: {text}`
         'error-select-pdf': 'Bitte wähle eine PDF-Datei aus.',
         'error-empty-text': 'Eingabetext ist leer.',
         'error-lmstudio-response': 'Unerwartete Antwort von LMStudio',
+        'error-ollama-response': 'Unerwartete Antwort von Ollama',
         'lmstudio-url-label': 'LMStudio URL:',
+        'ollama-url-label': 'Ollama URL:',
         'placeholder-lmstudio-url': 'http://localhost:1234',
+        'placeholder-ollama-url': 'http://localhost:11434',
         'placeholder-lmstudio-model': 'modell-bezeichner',
+        'placeholder-ollama-model': 'llama3 / mistral',
         'impressum-link': 'Impressum',
         'prompt-label': 'Eigener Prompt:',
         'placeholder-prompt': 'Gib hier deinen eigenen Prompt ein...',
@@ -225,30 +233,35 @@ function updateProviderUI(clearInputs = true) {
         aiModel.value = '';
     }
 
-    if (provider === 'lmstudio') {
-        apiKeyLabel.textContent = i18n('lmstudio-url-label');
+    if (provider === 'lmstudio' || provider === 'ollama') {
+        apiKeyLabel.textContent = i18n(provider === 'lmstudio' ? 'lmstudio-url-label' : 'ollama-url-label');
         apiKey.type = 'text';
-        apiKey.placeholder = i18n('placeholder-lmstudio-url');
+        apiKey.placeholder = i18n(provider === 'lmstudio' ? 'placeholder-lmstudio-url' : 'placeholder-ollama-url');
         
-        // Prefill LMStudio URL if empty (e.g. on provider change)
-        if (!apiKey.value && provider === 'lmstudio') {
-            apiKey.value = i18n('placeholder-lmstudio-url');
+        // Prefill URL if empty (e.g. on provider change)
+        if (!apiKey.value) {
+            apiKey.value = i18n(provider === 'lmstudio' ? 'placeholder-lmstudio-url' : 'placeholder-ollama-url');
         }
 
-        aiModel.placeholder = i18n('placeholder-lmstudio-model');
+        aiModel.placeholder = i18n(provider === 'lmstudio' ? 'placeholder-lmstudio-model' : 'placeholder-ollama-model');
         apiKeyLink.style.display = 'none';
         modelLink.style.display = 'none';
 
-        // Add CORS hint for LM Studio
-        let corsHint = document.getElementById('lmstudio-cors-hint-text');
+        // Add CORS hint for local models
+        let corsHint = document.getElementById('local-cors-hint-text');
         if (!corsHint) {
             corsHint = document.createElement('p');
-            corsHint.id = 'lmstudio-cors-hint-text';
+            corsHint.id = 'local-cors-hint-text';
             corsHint.className = 'hint-text';
             corsHint.style.color = '#e67e22';
             apiKey.parentNode.appendChild(corsHint);
         }
-        corsHint.textContent = i18n('lmstudio-cors-hint');
+        
+        if (provider === 'lmstudio') {
+            corsHint.textContent = i18n('lmstudio-cors-hint');
+        } else {
+            corsHint.textContent = currentLang === 'de' ? 'Tipp: Stelle sicher, dass Ollama läuft und OLLAMA_ORIGINS="*" gesetzt ist.' : 'Tip: Ensure Ollama is running and OLLAMA_ORIGINS="*" is set.';
+        }
         corsHint.style.display = 'block';
     } else {
         apiKeyLabel.textContent = i18n('api-key-label');
@@ -258,7 +271,7 @@ function updateProviderUI(clearInputs = true) {
         apiKeyLink.style.display = 'inline';
         modelLink.style.display = 'inline';
         
-        const corsHint = document.getElementById('lmstudio-cors-hint-text');
+        const corsHint = document.getElementById('local-cors-hint-text');
         if (corsHint) corsHint.style.display = 'none';
         
         if (provider === 'openai') {
@@ -267,6 +280,12 @@ function updateProviderUI(clearInputs = true) {
         } else if (provider === 'gemini') {
             apiKeyLink.href = 'https://aistudio.google.com/app/apikey';
             modelLink.href = 'https://ai.google.dev/models/gemini';
+        } else if (provider === 'mistral') {
+            apiKeyLink.href = 'https://console.mistral.ai/api-keys/';
+            modelLink.href = 'https://docs.mistral.ai/platform/models/';
+        } else if (provider === 'perplexity') {
+            apiKeyLink.href = 'https://www.perplexity.ai/settings/api';
+            modelLink.href = 'https://docs.perplexity.ai/docs/model-cards';
         }
     }
 }
@@ -445,6 +464,12 @@ fetchModelsBtn.addEventListener('click', async () => {
             models = await fetchGeminiModels(key);
         } else if (provider === 'lmstudio') {
             models = await fetchLMStudioModels(key);
+        } else if (provider === 'ollama') {
+            models = await fetchOllamaModels(key);
+        } else if (provider === 'mistral') {
+            models = await fetchMistralModels(key);
+        } else if (provider === 'perplexity') {
+            models = await fetchPerplexityModels(key);
         }
         
         updateModelDropdown(models);
@@ -504,6 +529,48 @@ async function fetchLMStudioModels(url) {
         console.error('LMStudio fetch error:', error);
         throw error;
     }
+}
+
+async function fetchOllamaModels(url) {
+    try {
+        let baseUrl = url.endsWith('/') ? url : url + '/';
+        const response = await fetch(`${baseUrl}api/tags`);
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+        return data.models.map(m => m.name).sort();
+    } catch (error) {
+        console.error('Ollama fetch error:', error);
+        throw error;
+    }
+}
+
+async function fetchMistralModels(key) {
+    const response = await fetch('https://api.mistral.ai/v1/models', {
+        headers: { 'Authorization': `Bearer ${key}` }
+    });
+    if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.error?.message || `HTTP error! status: ${response.status}`);
+    }
+    const data = await response.json();
+    return data.data.map(m => m.id).sort();
+}
+
+async function fetchPerplexityModels(key) {
+    // Perplexity doesn't have a public models endpoint that is easily accessible with the API key 
+    // in the same way OpenAI does, or it might be restricted. 
+    // According to their docs, they support specific model names.
+    return [
+        'sonar-small-chat',
+        'sonar-small-online',
+        'sonar-medium-chat',
+        'sonar-medium-online',
+        'codellama-70b-instruct',
+        'mistral-7b-instruct',
+        'mixtral-8x7b-instruct'
+    ].sort();
 }
 
 function updateModelDropdown(models) {
@@ -605,6 +672,12 @@ async function callAI(text) {
         return callGemini(key, model, prompt);
     } else if (provider === 'lmstudio') {
         return callLMStudio(key, model, prompt);
+    } else if (provider === 'ollama') {
+        return callOllama(key, model, prompt);
+    } else if (provider === 'mistral') {
+        return callMistral(key, model, prompt);
+    } else if (provider === 'perplexity') {
+        return callPerplexity(key, model, prompt);
     }
 }
 
@@ -655,6 +728,60 @@ async function callLMStudio(url, model, prompt) {
     const data = await response.json();
     if (data.error) throw new Error(data.error.message);
     if (!data.choices || !data.choices[0]) throw new Error(i18n('error-lmstudio-response'));
+    return data.choices[0].message.content;
+}
+
+async function callOllama(url, model, prompt) {
+    let baseUrl = url.endsWith('/') ? url : url + '/';
+    const response = await fetch(`${baseUrl}api/generate`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            model: model,
+            prompt: prompt,
+            stream: false
+        })
+    });
+    const data = await response.json();
+    if (data.error) throw new Error(data.error);
+    if (!data.response) throw new Error(i18n('error-ollama-response'));
+    return data.response;
+}
+
+async function callMistral(key, model, prompt) {
+    const response = await fetch('https://api.mistral.ai/v1/chat/completions', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${key}`
+        },
+        body: JSON.stringify({
+            model: model,
+            messages: [{ role: 'user', content: prompt }]
+        })
+    });
+    const data = await response.json();
+    if (data.error) throw new Error(data.error.message);
+    return data.choices[0].message.content;
+}
+
+async function callPerplexity(key, model, prompt) {
+    const response = await fetch('https://api.perplexity.ai/chat/completions', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${key}`
+        },
+        body: JSON.stringify({
+            model: model,
+            messages: [
+                { role: 'system', content: 'Be precise and concise.' },
+                { role: 'user', content: prompt }
+            ]
+        })
+    });
+    const data = await response.json();
+    if (data.error) throw new Error(data.error.message || JSON.stringify(data.error));
     return data.choices[0].message.content;
 }
 
