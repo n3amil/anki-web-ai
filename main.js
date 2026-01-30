@@ -217,6 +217,12 @@ function updateProviderUI(clearInputs = true) {
         apiKeyLabel.textContent = i18n('lmstudio-url-label');
         apiKey.type = 'text';
         apiKey.placeholder = i18n('placeholder-lmstudio-url');
+        
+        // Prefill LMStudio URL if empty (e.g. on provider change)
+        if (!apiKey.value && provider === 'lmstudio') {
+            apiKey.value = i18n('placeholder-lmstudio-url');
+        }
+
         aiModel.placeholder = i18n('placeholder-lmstudio-model');
         apiKeyLink.style.display = 'none';
         modelLink.style.display = 'none';
@@ -705,8 +711,18 @@ downloadCsv.addEventListener('click', () => {
     const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
     const link = document.createElement('a');
     const url = URL.createObjectURL(blob);
+    
+    // Generate timestamp: YYYYMMDD_HHMMSS
+    const now = new Date();
+    const timestamp = now.getFullYear() +
+        String(now.getMonth() + 1).padStart(2, '0') +
+        String(now.getDate()).padStart(2, '0') + '_' +
+        String(now.getHours()).padStart(2, '0') +
+        String(now.getMinutes()).padStart(2, '0') +
+        String(now.getSeconds()).padStart(2, '0');
+    
     link.setAttribute('href', url);
-    link.setAttribute('download', 'anki_flashcards.csv');
+    link.setAttribute('download', `anki_flashcards_${timestamp}.csv`);
     link.style.visibility = 'hidden';
     document.body.appendChild(link);
     link.click();
