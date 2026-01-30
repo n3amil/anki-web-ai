@@ -57,6 +57,8 @@ const translations = {
         'faq-import-android-a': '1. Transfer the .csv file to your phone.<br>2. Open AnkiDroid.<br>3. Tap the three dots (menu) and select "Import".<br>4. Pick the .csv file and follow the mapping instructions.',
         'faq-import-ios-q': 'How do I import into AnkiMobile (iOS)?',
         'faq-import-ios-a': '1. Send the .csv file to your iPhone/iPad (e.g., via iCloud Drive, AirDrop, or Email).<br>2. Open the "Files" app and tap on the file.<br>3. Tap the Share icon and select "Anki".<br>4. AnkiMobile will open and guide you through the import process.',
+        'faq-trust-q': 'Can I trust the generated cards?',
+        'faq-trust-a': 'No, you should always validate and check the generated cards. AI can sometimes make mistakes, hallucinate facts, or misinterpret the context of the input text.',
         'prompt-template': `Create {count} Anki flashcards from the following text. 
 The anki flashcards content MUST be english.
 {ignore_instruction}
@@ -123,6 +125,8 @@ Text: {text}`
         'faq-import-android-a': '1. Übertrage die .csv-Datei auf dein Handy.<br>2. Öffne AnkiDroid.<br>3. Tippe auf die drei Punkte (Menü) und wähle "Importieren".<br>4. Wähle die .csv-Datei aus und folge den Anweisungen.',
         'faq-import-ios-q': 'Wie importiere ich in AnkiMobile (iOS)?',
         'faq-import-ios-a': '1. Sende die .csv-Datei an dein iPhone/iPad (z.B. via iCloud Drive, AirDrop oder E-Mail).<br>2. Öffne die "Dateien"-App und tippe auf die Datei.<br>3. Tippe auf das Teilen-Icon und wähle "Anki".<br>4. AnkiMobile öffnet sich und führt dich durch den Import.',
+        'faq-trust-q': 'Kann ich den generierten Karten vertrauen?',
+        'faq-trust-a': 'Nein, du solltest die generierten Karten immer validieren und überprüfen. KI kann manchmal Fehler machen, Fakten halluzinieren oder den Kontext des Eingabetextes missverstehen.',
         'prompt-template': `Erstelle {count} Anki-Karteikarten aus dem folgenden Text.
 Der Inhalt der Anki-Karteikarten MUSS auf Deutsch sein.
 {ignore_instruction}
