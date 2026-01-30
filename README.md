@@ -2,7 +2,7 @@
 
 A lightweight Progressive Web App (PWA) that uses AI to generate Anki-compatible flashcards from text or PDF files.
 
-![GitHub stars](https://img.shields.io/github/stars/n3amil/anki-ai-web?style=social)
+[![Star History Chart](https://api.star-history.com/svg?repos=n3amil/anki-web-ai&type=Date)](https://star-history.com/#n3amil/anki-web-ai&Date)
 
 ## Features
 
