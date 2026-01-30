@@ -26,7 +26,7 @@ const translations = {
         'error-empty-text': 'Input text is empty.',
         'error-lmstudio-response': 'Unexpected response from LMStudio',
         'lmstudio-url-label': 'LMStudio URL:',
-        'placeholder-lmstudio-url': 'http://localhost:1234/v1',
+        'placeholder-lmstudio-url': 'http://localhost:1234',
         'placeholder-lmstudio-model': 'model-identifier',
         'impressum-link': 'Impressum',
         'prompt-label': 'Custom Prompt:',
@@ -38,7 +38,8 @@ const translations = {
         'fetch-models-btn': 'Fetch',
         'card-count-label': 'Number of flashcards:',
         'btn-fetching': 'Fetching...',
-        'error-fetch-models': 'Failed to fetch models. Check your API key/URL.',
+        'error-fetch-models': 'Failed to fetch models. Check your API key/URL. If using LM Studio, ensure CORS is enabled.',
+        'lmstudio-cors-hint': 'Tip: Enable CORS in LM Studio (Settings > Server > CORS: On)',
         'error-no-api-key': 'Please enter an API key / URL first.',
         'ignore-prompt-label': 'Ignore from input (optional):',
         'placeholder-ignore-prompt': 'e.g. Table of Contents, headers, footers...',
@@ -49,6 +50,13 @@ const translations = {
         'pdf-pages-label': 'Pages (e.g., all, 1-5, 8):',
         'placeholder-pdf-pages': 'all / 1-5 / 3, 5-7',
         'error-invalid-pages': 'Invalid page selection.',
+        'faq-title': 'Frequently Asked Questions',
+        'faq-import-desktop-q': 'How do I import the CSV into Anki on Desktop?',
+        'faq-import-desktop-a': '1. Open Anki on your computer.<br>2. Click "File" -> "Import" at the top left.<br>3. Select the downloaded .csv file.<br>4. Select your deck and ensure "Fields separated by" is set to Pipe.<br>5. Map the fields (usually Front and Back) and click "Import".',
+        'faq-import-android-q': 'How do I import into AnkiDroid (Android)?',
+        'faq-import-android-a': '1. Transfer the .csv file to your phone.<br>2. Open AnkiDroid.<br>3. Tap the three dots (menu) and select "Import".<br>4. Pick the .csv file and follow the mapping instructions.',
+        'faq-import-ios-q': 'How do I import into AnkiMobile (iOS)?',
+        'faq-import-ios-a': '1. Send the .csv file to your iPhone/iPad (e.g., via iCloud Drive, AirDrop, or Email).<br>2. Open the "Files" app and tap on the file.<br>3. Tap the Share icon and select "Anki".<br>4. AnkiMobile will open and guide you through the import process.',
         'prompt-template': `Create {count} Anki flashcards from the following text. 
 The anki flashcards content MUST be english.
 {ignore_instruction}
@@ -84,7 +92,7 @@ Text: {text}`
         'error-empty-text': 'Eingabetext ist leer.',
         'error-lmstudio-response': 'Unerwartete Antwort von LMStudio',
         'lmstudio-url-label': 'LMStudio URL:',
-        'placeholder-lmstudio-url': 'http://localhost:1234/v1',
+        'placeholder-lmstudio-url': 'http://localhost:1234',
         'placeholder-lmstudio-model': 'modell-bezeichner',
         'impressum-link': 'Impressum',
         'prompt-label': 'Eigener Prompt:',
@@ -96,7 +104,8 @@ Text: {text}`
         'fetch-models-btn': 'Abrufen',
         'card-count-label': 'Anzahl der Karteikarten:',
         'btn-fetching': 'Lädt...',
-        'error-fetch-models': 'Modelle konnten nicht geladen werden. Prüfe API-Key/URL.',
+        'error-fetch-models': 'Modelle konnten nicht geladen werden. Prüfe API-Key/URL. Wenn du LM Studio nutzt, stelle sicher, dass CORS aktiviert ist.',
+        'lmstudio-cors-hint': 'Tipp: Aktiviere CORS in LM Studio (Einstellungen > Server > CORS: An)',
         'error-no-api-key': 'Bitte gib zuerst einen API-Schlüssel / eine URL ein.',
         'ignore-prompt-label': 'Ignorieren (optional):',
         'placeholder-ignore-prompt': 'z.B. Inhaltsverzeichnis, Kopfzeilen, Fußzeilen...',
@@ -107,6 +116,13 @@ Text: {text}`
         'pdf-pages-label': 'Seiten (z.B. alle, 1-5, 8):',
         'placeholder-pdf-pages': 'alle / 1-5 / 3, 5-7',
         'error-invalid-pages': 'Ungültige Seitenauswahl.',
+        'faq-title': 'Häufig gestellte Fragen (FAQ)',
+        'faq-import-desktop-q': 'Wie importiere ich die CSV-Datei in Anki am Desktop?',
+        'faq-import-desktop-a': '1. Öffne Anki auf deinem Computer.<br>2. Klicke oben links auf "Datei" -> "Importieren".<br>3. Wähle die heruntergeladene .csv-Datei aus.<br>4. Wähle deinen Stapel aus und stelle sicher, dass "Felder getrennt durch" auf Pipe (oder |) steht.<br>5. Ordne die Felder zu (meistens Frage und Antwort) und klicke auf "Importieren".',
+        'faq-import-android-q': 'Wie importiere ich in AnkiDroid (Android)?',
+        'faq-import-android-a': '1. Übertrage die .csv-Datei auf dein Handy.<br>2. Öffne AnkiDroid.<br>3. Tippe auf die drei Punkte (Menü) und wähle "Importieren".<br>4. Wähle die .csv-Datei aus und folge den Anweisungen.',
+        'faq-import-ios-q': 'Wie importiere ich in AnkiMobile (iOS)?',
+        'faq-import-ios-a': '1. Sende die .csv-Datei an dein iPhone/iPad (z.B. via iCloud Drive, AirDrop oder E-Mail).<br>2. Öffne die "Dateien"-App und tippe auf die Datei.<br>3. Tippe auf das Teilen-Icon und wähle "Anki".<br>4. AnkiMobile öffnet sich und führt dich durch den Import.',
         'prompt-template': `Erstelle {count} Anki-Karteikarten aus dem folgenden Text.
 Der Inhalt der Anki-Karteikarten MUSS auf Deutsch sein.
 {ignore_instruction}
@@ -131,7 +147,7 @@ function i18n(key, variables = {}) {
 function applyTranslations() {
     document.querySelectorAll('[data-i18n]').forEach(el => {
         const key = el.getAttribute('data-i18n');
-        el.textContent = i18n(key);
+        el.innerHTML = i18n(key);
     });
     
     // Placeholders
@@ -182,7 +198,7 @@ function applyTranslations() {
     updateLangSwitcherUI();
 }
 
-function updateProviderUI() {
+function updateProviderUI(clearInputs = true) {
     const provider = aiProvider.value;
     const apiKeyLink = document.getElementById('api-key-link');
     const modelLink = document.getElementById('model-link');
@@ -191,6 +207,12 @@ function updateProviderUI() {
     const existingSelect = document.getElementById('ai-model-select');
     if (existingSelect) existingSelect.remove();
 
+    // Clear input fields when provider changes (optional)
+    if (clearInputs) {
+        apiKey.value = '';
+        aiModel.value = '';
+    }
+
     if (provider === 'lmstudio') {
         apiKeyLabel.textContent = i18n('lmstudio-url-label');
         apiKey.type = 'text';
@@ -198,6 +220,18 @@ function updateProviderUI() {
         aiModel.placeholder = i18n('placeholder-lmstudio-model');
         apiKeyLink.style.display = 'none';
         modelLink.style.display = 'none';
+
+        // Add CORS hint for LM Studio
+        let corsHint = document.getElementById('lmstudio-cors-hint-text');
+        if (!corsHint) {
+            corsHint = document.createElement('p');
+            corsHint.id = 'lmstudio-cors-hint-text';
+            corsHint.className = 'hint-text';
+            corsHint.style.color = '#e67e22';
+            apiKey.parentNode.appendChild(corsHint);
+        }
+        corsHint.textContent = i18n('lmstudio-cors-hint');
+        corsHint.style.display = 'block';
     } else {
         apiKeyLabel.textContent = i18n('api-key-label');
         apiKey.type = 'password';
@@ -205,6 +239,9 @@ function updateProviderUI() {
         aiModel.placeholder = i18n('placeholder-model');
         apiKeyLink.style.display = 'inline';
         modelLink.style.display = 'inline';
+        
+        const corsHint = document.getElementById('lmstudio-cors-hint-text');
+        if (corsHint) corsHint.style.display = 'none';
         
         if (provider === 'openai') {
             apiKeyLink.href = 'https://platform.openai.com/api-keys';
@@ -246,6 +283,7 @@ const pdfPages = document.getElementById('pdf-pages');
 const generateBtn = document.getElementById('generate-btn');
 const saveSettingsBtn = document.getElementById('save-settings-btn');
 const flashcardsList = document.getElementById('flashcards-list');
+const loadingSpinner = document.getElementById('loading-spinner');
 const downloadCsv = document.getElementById('download-csv');
 const pdfStatus = document.getElementById('pdf-status');
 const tabBtns = document.querySelectorAll('.tab-btn');
@@ -271,8 +309,11 @@ function loadSettings() {
     if (saved) {
         try {
             const settings = JSON.parse(saved);
-            if (settings.provider) aiProvider.value = settings.provider;
-            updateProviderUI(); // Update UI based on provider before setting key/model
+            if (settings.provider) {
+                aiProvider.value = settings.provider;
+                // Update UI based on provider but DON'T clear fields during initial load
+                updateProviderUI(false); 
+            }
             if (settings.apiKey) apiKey.value = settings.apiKey;
             if (settings.model) aiModel.value = settings.model;
         } catch (e) {
@@ -391,7 +432,11 @@ fetchModelsBtn.addEventListener('click', async () => {
         updateModelDropdown(models);
     } catch (error) {
         console.error(error);
-        alert(i18n('error-fetch-models'));
+        let errorMsg = i18n('error-fetch-models');
+        if (provider === 'lmstudio') {
+            errorMsg += '\n\n' + i18n('lmstudio-cors-hint');
+        }
+        alert(errorMsg + (error.message ? '\n\n' + error.message : ''));
     } finally {
         fetchModelsBtn.disabled = false;
         fetchModelsBtn.textContent = i18n('fetch-models-btn');
@@ -402,15 +447,21 @@ async function fetchOpenAIModels(key) {
     const response = await fetch('https://api.openai.com/v1/models', {
         headers: { 'Authorization': `Bearer ${key}` }
     });
+    if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.error?.message || `HTTP error! status: ${response.status}`);
+    }
     const data = await response.json();
-    if (data.error) throw new Error(data.error.message);
     return data.data.map(m => m.id).sort();
 }
 
 async function fetchGeminiModels(key) {
     const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models?key=${key}`);
+    if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.error?.message || `HTTP error! status: ${response.status}`);
+    }
     const data = await response.json();
-    if (data.error) throw new Error(data.error.message);
     // Filter for models that support generateContent
     return data.models
         .filter(m => m.supportedGenerationMethods.includes('generateContent'))
@@ -419,11 +470,22 @@ async function fetchGeminiModels(key) {
 }
 
 async function fetchLMStudioModels(url) {
-    const baseUrl = url.endsWith('/') ? url : url + '/';
-    const response = await fetch(`${baseUrl}models`);
-    const data = await response.json();
-    if (data.error) throw new Error(data.error.message);
-    return data.data.map(m => m.id).sort();
+    try {
+        let baseUrl = url.endsWith('/') ? url : url + '/';
+        if (!baseUrl.endsWith('/v1/')) {
+            baseUrl += 'v1/';
+        }
+        const response = await fetch(`${baseUrl}models`);
+        if (!response.ok) {
+            const errorData = await response.json().catch(() => ({}));
+            throw new Error(errorData.error?.message || `HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+        return data.data.map(m => m.id).sort();
+    } catch (error) {
+        console.error('LMStudio fetch error:', error);
+        throw error;
+    }
 }
 
 function updateModelDropdown(models) {
@@ -559,8 +621,11 @@ async function callGemini(key, model, prompt) {
 }
 
 async function callLMStudio(url, model, prompt) {
-    // Assuming LMStudio is running at the provided URL (e.g., http://localhost:1234/v1)
-    const baseUrl = url.endsWith('/') ? url : url + '/';
+    // Assuming LMStudio is running at the provided URL (e.g., http://localhost:1234)
+    let baseUrl = url.endsWith('/') ? url : url + '/';
+    if (!baseUrl.endsWith('/v1/')) {
+        baseUrl += 'v1/';
+    }
     const response = await fetch(`${baseUrl}chat/completions`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -580,8 +645,13 @@ generateBtn.addEventListener('click', async () => {
     let text = '';
     const activeTab = document.querySelector('.tab-btn.active').dataset.tab;
     
+    // Clear previous results
+    generatedFlashcards = [];
+    renderFlashcards();
+    
     generateBtn.disabled = true;
     generateBtn.textContent = i18n('btn-generating');
+    loadingSpinner.style.display = 'block';
     
     try {
         if (activeTab === 'text-input') {
@@ -597,10 +667,15 @@ generateBtn.addEventListener('click', async () => {
         parseFlashcards(aiResponse);
         renderFlashcards();
     } catch (error) {
-        alert(error.message || 'Error: ' + error);
+        let errorMsg = error.message || 'Error: ' + error;
+        if (aiProvider.value === 'lmstudio' && (errorMsg.includes('fetch') || errorMsg.includes('NetworkError') || errorMsg.includes('Failed to fetch'))) {
+            errorMsg += '\n\n' + i18n('lmstudio-cors-hint');
+        }
+        alert(errorMsg);
     } finally {
         generateBtn.disabled = false;
         generateBtn.textContent = i18n('generate-btn');
+        loadingSpinner.style.display = 'none';
     }
 });
 
@@ -626,7 +701,7 @@ function renderFlashcards() {
 
 // Export CSV
 downloadCsv.addEventListener('click', () => {
-    const csvContent = generatedFlashcards.map(c => `"${c.q.replace(/"/g, '""')}","${c.a.replace(/"/g, '""')}"`).join('\n');
+    const csvContent = generatedFlashcards.map(c => `"${c.q.replace(/"/g, '""')}"|"${c.a.replace(/"/g, '""')}"`).join('\n');
     const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
     const link = document.createElement('a');
     const url = URL.createObjectURL(blob);

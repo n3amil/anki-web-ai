@@ -94,9 +94,44 @@
 
         <section id="output-section">
             <h2 data-i18n="output-title">Generated Flashcards</h2>
+            <div id="loading-spinner" class="spinner"></div>
             <div id="flashcards-list"></div>
             <div class="actions">
                 <button id="download-csv" disabled data-i18n="download-btn">Download for Anki (.csv)</button>
+            </div>
+        </section>
+
+        <section id="faq-section">
+            <h2 data-i18n="faq-title">Frequently Asked Questions</h2>
+            <div class="faq-container">
+                <details>
+                    <summary data-i18n="faq-import-desktop-q">How do I import the CSV into Anki on Desktop?</summary>
+                    <div class="faq-answer" data-i18n="faq-import-desktop-a">
+                        1. Open Anki on your computer.<br>
+                        2. Click "File" -> "Import" at the top left.<br>
+                        3. Select the downloaded .csv file.<br>
+                        4. Select your deck and ensure "Fields separated by" is set to Pipe.<br>
+                        5. Map the fields (usually Front and Back) and click "Import".
+                    </div>
+                </details>
+                <details>
+                    <summary data-i18n="faq-import-android-q">How do I import into AnkiDroid (Android)?</summary>
+                    <div class="faq-answer" data-i18n="faq-import-android-a">
+                        1. Transfer the .csv file to your phone.<br>
+                        2. Open AnkiDroid.<br>
+                        3. Tap the three dots (menu) and select "Import".<br>
+                        4. Pick the .csv file and follow the mapping instructions.
+                    </div>
+                </details>
+                <details>
+                    <summary data-i18n="faq-import-ios-q">How do I import into AnkiMobile (iOS)?</summary>
+                    <div class="faq-answer" data-i18n="faq-import-ios-a">
+                        1. Send the .csv file to your iPhone/iPad (e.g., via iCloud Drive, AirDrop, or Email).<br>
+                        2. Open the "Files" app and tap on the file.<br>
+                        3. Tap the Share icon and select "Anki".<br>
+                        4. AnkiMobile will open and guide you through the import process.
+                    </div>
+                </details>
             </div>
         </section>
 

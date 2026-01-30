@@ -26,6 +26,7 @@ A lightweight Progressive Web App (PWA) that uses AI to generate Anki-compatible
    - Open Anki.
    - Go to `File` -> `Import`.
    - Select the downloaded `.csv` file.
+   - Ensure "Fields separated by" is set to Pipe `|`.
    - Map the fields (usually Question | Answer).
 
 ## Installation
