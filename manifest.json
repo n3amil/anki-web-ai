@@ -1,6 +1,6 @@
 {
-  "name": "Anki AI Creator",
-  "short_name": "AnkiAI",
+  "name": "Ankiki",
+  "short_name": "Ankiki",
   "description": "Generate Anki flashcards from text or PDF using AI.",
   "start_url": "./index.html",
   "display": "standalone",

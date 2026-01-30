@@ -1,4 +1,4 @@
-# Anki AI Flashcard Creator
+# Ankiki
 
 A lightweight Progressive Web App (PWA) that uses AI to generate Anki-compatible flashcards from text or PDF files.
 

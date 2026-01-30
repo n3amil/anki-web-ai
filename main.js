@@ -1,7 +1,7 @@
 // Translations
 const translations = {
     en: {
-        'app-title': 'Anki AI',
+        'app-title': 'Ankiki',
         'app-subtitle': 'Generate flashcards from PDF or Text',
         'settings-title': 'AI Settings',
         'provider-label': 'Provider:',
@@ -69,7 +69,7 @@ Do not include any other text in your response, just the flashcards.
 Text: {text}`
     },
     de: {
-        'app-title': 'Anki KI',
+        'app-title': 'Ankiki',
         'app-subtitle': 'Erstelle Karteikarten aus PDF oder Text',
         'settings-title': 'KI-Einstellungen',
         'provider-label': 'Anbieter:',
@@ -310,12 +310,12 @@ function saveSettings() {
         apiKey: apiKey.value,
         model: aiModel.value
     };
-    localStorage.setItem('anki-ai-settings', JSON.stringify(settings));
+    localStorage.setItem('ankiki-settings', JSON.stringify(settings));
     alert(i18n('settings-saved'));
 }
 
 function loadSettings() {
-    const saved = localStorage.getItem('anki-ai-settings');
+    const saved = localStorage.getItem('ankiki-settings') || localStorage.getItem('anki-ai-settings');
     if (saved) {
         try {
             const settings = JSON.parse(saved);

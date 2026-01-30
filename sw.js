@@ -1,4 +1,4 @@
-const CACHE_NAME = 'anki-ai-v1';
+const CACHE_NAME = 'ankiki-v1';
 const ASSETS = [
   './',
   './index.html',
