@@ -2,7 +2,7 @@
 const translations = {
     en: {
         'app-title': 'Ankiki',
-        'app-subtitle': 'Generate flashcards from PDF or Text',
+        'app-subtitle': 'Effortlessly create high-quality Anki flashcards with the help of AI. Use your preferred provider like OpenAI or Gemini, or run models locally via LM Studio for maximum privacy.',
         'settings-title': 'AI Settings',
         'provider-label': 'Provider:',
         'api-key-label': 'API Key:',
@@ -59,6 +59,8 @@ const translations = {
         'faq-import-ios-a': '1. Send the .csv file to your iPhone/iPad (e.g., via iCloud Drive, AirDrop, or Email).<br>2. Open the "Files" app and tap on the file.<br>3. Tap the Share icon and select "Anki".<br>4. AnkiMobile will open and guide you through the import process.',
         'faq-trust-q': 'Can I trust the generated cards?',
         'faq-trust-a': 'No, you should always validate and check the generated cards. AI can sometimes make mistakes, hallucinate facts, or misinterpret the context of the input text.',
+        'faq-copyright-q': 'Am I allowed to upload my PDFs to an LLM?',
+        'faq-copyright-a': 'It depends on the content. You must ensure you have the right to share the content with an AI provider. For example, many professors prohibit uploading their lecture slides or materials to third-party services. If you are concerned about privacy or copyright, consider using a local model via LM Studio.',
         'prompt-template': `Create {count} Anki flashcards from the following text. 
 The anki flashcards content MUST be english.
 {ignore_instruction}
@@ -70,7 +72,7 @@ Text: {text}`
     },
     de: {
         'app-title': 'Ankiki',
-        'app-subtitle': 'Erstelle Karteikarten aus PDF oder Text',
+        'app-subtitle': 'Erstelle mühelos hochwertige Anki-Karteikarten mit Hilfe von KI. Nutze den Anbieter deiner Wahl wie OpenAI oder Gemini, oder betreibe lokale Modelle über LM Studio für maximale Privatsphäre.',
         'settings-title': 'KI-Einstellungen',
         'provider-label': 'Anbieter:',
         'api-key-label': 'API-Schlüssel:',
@@ -127,6 +129,8 @@ Text: {text}`
         'faq-import-ios-a': '1. Sende die .csv-Datei an dein iPhone/iPad (z.B. via iCloud Drive, AirDrop oder E-Mail).<br>2. Öffne die "Dateien"-App und tippe auf die Datei.<br>3. Tippe auf das Teilen-Icon und wähle "Anki".<br>4. AnkiMobile öffnet sich und führt dich durch den Import.',
         'faq-trust-q': 'Kann ich den generierten Karten vertrauen?',
         'faq-trust-a': 'Nein, du solltest die generierten Karten immer validieren und überprüfen. KI kann manchmal Fehler machen, Fakten halluzinieren oder den Kontext des Eingabetextes missverstehen.',
+        'faq-copyright-q': 'Darf ich meine PDFs bei einer KI hochladen?',
+        'faq-copyright-a': 'Das hängt vom Inhalt ab. Du musst sicherstellen, dass du das Recht hast, die Inhalte mit einem KI-Anbieter zu teilen. Zum Beispiel untersagen viele Professoren ausdrücklich das Hochladen ihrer Vorlesungsfolien oder Materialien bei Drittanbietern. Wenn du Bedenken bezüglich Datenschutz oder Urheberrecht hast, ziehe in Erwägung, ein lokales Modell über LM Studio zu nutzen.',
         'prompt-template': `Erstelle {count} Anki-Karteikarten aus dem folgenden Text.
 Der Inhalt der Anki-Karteikarten MUSS auf Deutsch sein.
 {ignore_instruction}
