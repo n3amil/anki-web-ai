@@ -28,7 +28,7 @@ const translations = {
         'lmstudio-url-label': 'LMStudio URL:',
         'placeholder-lmstudio-url': 'http://localhost:1234',
         'placeholder-lmstudio-model': 'model-identifier',
-        'impressum-link': 'Impressum',
+        'impressum-link': 'Legal Notice',
         'prompt-label': 'Custom Prompt:',
         'placeholder-prompt': 'Enter your custom prompt here...',
         'api-key-warning': 'Security Note: Never share your API token. It is stored only in your browser and is never uploaded. Please monitor your usage.',
