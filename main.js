@@ -59,7 +59,7 @@ const translations = {
         'faq-import-ios-a': '1. Send the .csv file to your iPhone/iPad (e.g., via iCloud Drive, AirDrop, or Email).<br>2. Open the "Files" app and tap on the file.<br>3. Tap the Share icon and select "Anki".<br>4. AnkiMobile will open and guide you through the import process.',
         'faq-trust-q': 'Can I trust the generated cards?',
         'faq-trust-a': 'No, you should always validate and check the generated cards. AI can sometimes make mistakes, hallucinate facts, or misinterpret the context of the input text.',
-        'faq-copyright-q': 'Am I allowed to upload my PDFs to an LLM?',
+        'faq-copyright-q': 'Am I allowed to upload my contents to an LLM?',
         'faq-copyright-a': 'It depends on the content. You must ensure you have the right to share the content with an AI provider. For example, many professors prohibit uploading their lecture slides or materials to third-party services. If you are concerned about privacy or copyright, consider using a local model via LM Studio.',
         'prompt-template': `Create {count} Anki flashcards from the following text. 
 The anki flashcards content MUST be english.
@@ -129,7 +129,7 @@ Text: {text}`
         'faq-import-ios-a': '1. Sende die .csv-Datei an dein iPhone/iPad (z.B. via iCloud Drive, AirDrop oder E-Mail).<br>2. Öffne die "Dateien"-App und tippe auf die Datei.<br>3. Tippe auf das Teilen-Icon und wähle "Anki".<br>4. AnkiMobile öffnet sich und führt dich durch den Import.',
         'faq-trust-q': 'Kann ich den generierten Karten vertrauen?',
         'faq-trust-a': 'Nein, du solltest die generierten Karten immer validieren und überprüfen. KI kann manchmal Fehler machen, Fakten halluzinieren oder den Kontext des Eingabetextes missverstehen.',
-        'faq-copyright-q': 'Darf ich meine PDFs bei einer KI hochladen?',
+        'faq-copyright-q': 'Darf ich meine Inhalte bei einer KI hochladen?',
         'faq-copyright-a': 'Das hängt vom Inhalt ab. Du musst sicherstellen, dass du das Recht hast, die Inhalte mit einem KI-Anbieter zu teilen. Zum Beispiel untersagen viele Professoren ausdrücklich das Hochladen ihrer Vorlesungsfolien oder Materialien bei Drittanbietern. Wenn du Bedenken bezüglich Datenschutz oder Urheberrecht hast, ziehe in Erwägung, ein lokales Modell über LM Studio zu nutzen.',
         'prompt-template': `Erstelle {count} Anki-Karteikarten aus dem folgenden Text.
 Der Inhalt der Anki-Karteikarten MUSS auf Deutsch sein.
