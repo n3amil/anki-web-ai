@@ -1,9 +1,9 @@
-const CACHE_NAME = 'ankiki-v1';
+const CACHE_NAME = 'ankiki-v1769804438';
 const ASSETS = [
   './',
   './index.html',
-  './style.css',
-  './main.js',
+  './style.css?v=1769804438',
+  './main.js?v=1769804438',
   './manifest.json',
   './vendor/pdf.min.js',
   './vendor/pdf.worker.min.js'
